@@ -1,0 +1,8 @@
+Sub ChangeColor()
+lRow = Range("B" & Rows.Count).End(xlUp).Row
+Set MR = Range("B2:B" & lRow)
+For Each cell In MR
+If cell.Value = "The operation timed out" Then cell.Interior.ColorIndex = 15
+If cell.Value = "404" Then cell.Interior.ColorIndex = 3
+    Next
+End Sub

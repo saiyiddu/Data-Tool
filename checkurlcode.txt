@@ -1,0 +1,13 @@
+Public Function CheckURL(url As String)
+    Dim request As Object
+    Set request = CreateObject("WinHttp.WinHttpRequest.5.1")
+    On Error GoTo haveError
+    With request
+        .Open "HEAD", url
+        .send
+        CheckURL = .Status
+    End With
+    Exit Function
+haveError:
+    CheckURL = Err.Description
+End Function

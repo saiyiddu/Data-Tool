@@ -1,0 +1,16 @@
+def xcaptilize(word):
+    skipList = ['a', 'in', 'the', 'of', 'to','or', 'for', 'on', 'and', 'at' , 'with']
+    if word not in skipList:
+        return word.capitalize()
+    return word
+
+import csv
+with open ('test.csv') as csvDataFile:
+  reader = csv.reader(csvDataFile)
+  for row in reader:
+    str_row1 = ''.join(row) #converts to string
+    print(str_row1)
+    k = str_row1.split(" ") 
+    l = map(xcaptilize, k)
+    print " ".join(l)  
+  

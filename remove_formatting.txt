@@ -1,0 +1,36 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Apr 23 10:24:02 2019
+
+@author: SaiyidDu
+"""
+##removes merged cells, bold and italic formating from xlsx files
+import openpyxl
+
+filepath = r"C:\Users\SaiyidDu\Desktop\pigs (6).xlsx"
+
+wb1 = openpyxl.load_workbook(filepath)
+source = wb1['pigs_e']
+target=wb1.copy_worksheet(source)
+
+##unmerging of cells
+target.merge_cells('A1:G1')
+target.merge_cells('A2:G2')
+target.unmerge_cells('A1:G1')
+target.unmerge_cells('A2:G2')
+
+##removing all bold and italic formatting
+max_row = target.max_row
+max_column = target.max_column
+
+for i in range(1,max_row+1):
+     for j in range(1,max_column+1):
+          target.cell(row=i, column =j).font = openpyxl.styles.Font(bold=False, italic=False)
+        
+##removing excess sheets
+wb1.remove(wb1['pigs_e'])
+wb1.remove(wb1['Pigs_f'])
+##renaming sheet
+target.title = 'pigs_e'
+
+wb1.save('pigs NF.xlsx')

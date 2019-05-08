@@ -1,0 +1,30 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Apr 24 16:25:53 2019
+
+@author: SaiyidDu
+"""
+
+##Date formats 
+import xlrd
+import datetime         
+                                                                
+filepath = r"C:\Users\SaiyidDu\Desktop\dates_example.xls"
+
+file = xlrd.open_workbook(filepath)
+sheet1 = file.sheet_by_index(0)
+
+max_row = sheet1.nrows
+max_column = sheet1.ncols
+
+for row in range(0, max_row ):
+    for col in range(0, max_column) :
+        a1 = sheet1.cell_value(row, col)
+        if type(a1) == "str":
+            a1 = str(a1)
+            mydate = datetime.datetime.strptime(a1, '%d/%m/%Y')
+            my_date_converted = datetime.datetime.strftime(mydate, '%Y%m%d')
+        elif type(a1) == "float":
+             a1_as_datetime = datetime.datetime(xlrd.xlsdate_as_tuple(mydate,file.datemode))
+             mydate = datetime.datetime.strftime(a1_as_datetime, '%Y/%m/%d')
+                                                                               

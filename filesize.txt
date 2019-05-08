@@ -1,0 +1,11 @@
+Public Function FileSize(sURL As String)
+Dim oXHTTP As Object
+Set oXHTTP = CreateObject("MSXML2.XMLHTTP")
+oXHTTP.Open "HEAD", sURL, False
+oXHTTP.send
+If oXHTTP.Status = 200 Then
+FileSize = oXHTTP.getResponseHeader("Content-Length")
+Else
+FileSize = -1
+End If
+End Function

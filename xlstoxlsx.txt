@@ -1,0 +1,26 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Apr 24 10:14:28 2019
+
+@author: SaiyidDu
+"""
+
+## xls to xlsx 
+import xlrd 
+import openpyxl 
+
+filepath = r"C:\Users\SaiyidDu\Desktop\pigs (6).xls"
+
+xlsfile = xlrd.open_workbook(filepath, formatting_info = True)
+xlsxfile = openpyxl.Workbook()
+
+for x in range (0, xlsfile.nsheets):
+    xls_sheet = xlsfile.sheet_by_index(x)
+    sheet = xlsxfile.active if x==0 else xlsxfile.create_sheet()
+    sheet.title = xls_sheet.name
+    
+    for row in range(0, xls_sheet.nrows):
+        for column in range (0,xls_sheet.ncols):
+            sheet.cell(row = row+1, column = column+1).value  = xls_sheet.cell_value(row,column)
+            
+xlsxfile.save('pigs.xlsx')

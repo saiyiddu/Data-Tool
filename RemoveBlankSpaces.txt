@@ -1,0 +1,14 @@
+import csv
+
+inputCSV = open("DPI file.csv", 'rb')
+outputCSV = open(r'C:\OUTPUT.csv', 'wb')
+appendCSV = open(r'C:\OUTPUT.csv', 'ab')
+cr = csv.reader(inputCSV, dialect = 'excel')
+cw = csv.writer(outputCSV, dialect = 'excel')
+ca = csv.writer(appendCSV, dialect = 'excel')
+for row in cr:
+    if any(row):
+        ca.writerow(row)
+inputCSV.close()
+outputCSV.close()
+appendCSV.close()
